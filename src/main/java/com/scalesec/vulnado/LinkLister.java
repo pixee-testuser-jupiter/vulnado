@@ -23,7 +23,7 @@ public class LinkLister {
 
   public static List<String> getLinksV2(String url) throws BadRequest {
     try {
-      URL aUrl= new URL(url);
+      URL aUrl= io.pixee.security.SSRF.createSafeURL(url, io.pixee.security.SSRF.HTTP_PROTOCOLS, io.pixee.security.HostValidator.DENY_COMMON_INFRASTRUCTURE_TARGETS);
       String host = aUrl.getHost();
       System.out.println(host);
       if (host.startsWith("172.") || host.startsWith("192.168") || host.startsWith("10.")){
